@@ -1,0 +1,88 @@
+/**
+ * Dark mode overrides.
+ * The theme already drives all its colors from CSS custom properties
+ * declared on :root (see main.css). Dark mode simply re-declares those
+ * same variables, scoped to html[data-theme="dark"], so every element
+ * that already reads var(--background-color) etc. picks up the new
+ * values automatically — no per-element overrides needed.
+ *
+ * Sections explicitly marked .dark-background (header, hero) are already
+ * dark in light mode by design and are left untouched. Sections marked
+ * .light-background (footer, portfolio) get their own dark variant so
+ * the whole page reads as consistently dark.
+ */
+
+html[data-theme="dark"] {
+  --background-color: #0a1119;
+  --default-color: #c5c8cc;
+  --heading-color: #ffffff;
+  --surface-color: #101a26;
+  --contrast-color: #ffffff;
+}
+
+html[data-theme="dark"] .light-background {
+  --background-color: #0e1620;
+  --surface-color: #131f2c;
+}
+
+/* .dark-background (the sidebar header, and the Home page hero) hardcodes
+   its own colors and would otherwise never change with the toggle. Give it
+   a distinct, slightly lighter shade in dark mode so it reads as part of
+   the same dark page rather than staying visually identical in both themes. */
+html[data-theme="dark"] .dark-background {
+  --background-color: #0d1620;
+  --surface-color: #17222f;
+}
+
+html[data-theme="light"] #header.dark-background {
+  --surface-color: #14384a;
+  background: linear-gradient(160deg, #020024 0%, #216682 30%, #00D4FF 100%);
+
+  --nav-color: #ffe9b3 !important;
+  --nav-hover-color: #ffffff !important;
+}
+
+/* Theme toggle button - floats at the top-right of the viewport */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  transition: background-color 0.3s;
+}
+
+.theme-toggle:hover {
+  background-color: color-mix(in srgb, var(--accent-color) 90%, white 15%);
+}
+
+.theme-toggle .bi-moon-stars-fill {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .bi-sun-fill {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle .bi-moon-stars-fill {
+  display: inline-block;
+}
+
+/* On smaller screens the sidebar's own hamburger toggle already occupies
+   top-right (top: 15px; right: 15px;), so shift the theme toggle to sit
+   beside it instead of overlapping it. */
+@media (max-width: 1199px) {
+  .theme-toggle {
+    right: 65px;
+  }
+}
