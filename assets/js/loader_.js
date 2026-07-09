@@ -43,11 +43,6 @@ async function loadPage(page) {
             window.initSkillsAnimation();
         }
 
-        // Set up validation + EmailJS submission on the Contact page's form.
-        if (typeof window.initContactForm === "function") {
-            window.initContactForm();
-        }
-
     } catch(error) {
 
         console.error(error);
