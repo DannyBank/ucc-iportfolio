@@ -45,23 +45,12 @@ Simply open index.html in your browser.
 
 Alternatively, you can use a local development server for the best experience.
 
-For example:
+For example: go to the root directory and run "http-server"
 
 # VS Code Live Server
+
+For the online deployed solution:
 Navigate to: https://ucc-iportfolio.vercel.app/
-
-Customization
-
-You can easily personalize this portfolio by updating:
-
-Profile image in assets/img/
-Personal information
-About section
-Portfolio projects
-Contact details
-Social media links
-Theme colors and styles in assets/css/
-Browser Support
 
 This project works on all modern browsers, including:
 
