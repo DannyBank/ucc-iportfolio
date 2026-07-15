@@ -1,0 +1,43 @@
+/**
+ * Per-page navbar gradient + crossfade.
+ *
+ * How it works:
+ * - #header gets two stacked, absolutely-positioned "layers" (.header-bg-layer)
+ *   painted behind its real content (z-index: -1, see main.css paint-order
+ *   notes) via negative z-index within the header's own stacking context.
+ * - Only one layer carries the `.is-active` class (opacity: 1) at a time.
+ * - assets/js/nav-gradient.js swaps the idle layer's background to the
+ *   next page's gradient, then toggles `.is-active` on both layers at once
+ *   so one fades out while the other fades in - a true crossfade rather
+ *   than an abrupt background swap.
+ * - --header-gradient is kept in sync alongside the layers so anything
+ *   else that wants "the current page gradient" (print styles, a future
+ *   no-JS fallback, etc.) can just read the variable.
+ *
+ * Scoped to light theme only, matching the pre-existing behavior where
+ * the sidebar gradient was exclusive to `html[data-theme="light"] #header`
+ * (see dark-mode.css) - dark theme keeps its own flat header background.
+ */
+
+:root {
+  --header-gradient: linear-gradient(160deg, #020024 0%, #216682 30%, #00D4FF 100%);
+}
+
+.header-bg-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+html[data-theme="light"] #header.dark-background .header-bg-layer.is-active {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header-bg-layer {
+    transition-duration: 0.01ms;
+  }
+}

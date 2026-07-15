@@ -48,6 +48,11 @@ async function loadPage(page) {
             window.initContactForm();
         }
 
+        // Crossfade the navbar background to this page's gradient.
+        if (typeof window.updateNavGradient === "function") {
+            window.updateNavGradient(page);
+        }
+
     } catch(error) {
 
         console.error(error);

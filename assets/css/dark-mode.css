@@ -36,11 +36,13 @@ html[data-theme="dark"] .dark-background {
 
 html[data-theme="light"] #header.dark-background {
   --surface-color: #14384a;
-  background: linear-gradient(160deg, #020024 0%, #216682 30%, #00D4FF 100%);
 
   --nav-color: #ffe9b3 !important;
   --nav-hover-color: #ffffff !important;
 }
+
+/* The gradient itself (now per-page and cross-faded) lives in
+   nav-gradient.css / nav-gradient.js, applied via .header-bg-layer. */
 
 /* Theme toggle button - floats at the top-right of the viewport */
 .theme-toggle {
