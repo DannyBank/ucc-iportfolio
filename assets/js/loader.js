@@ -65,8 +65,26 @@ async function loadPage(page) {
     }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
+
+    // Load home initially
+    loadPage("home");
+
+    // Delegated click handling: works for the sidebar nav links AND any
+    // button/link anywhere (including inside dynamically-loaded pages)
+    // that has a data-page attribute — no rebinding needed after navigation.
+    document.addEventListener("click", (e) => {
+        const trigger = e.target.closest("[data-page]");
+        if (!trigger) return;
+
+        e.preventDefault();
+        loadPage(trigger.dataset.page);
+    });
+
+});
+
+
+/*document.addEventListener("DOMContentLoaded", () => {
 
     // Load home initially
     loadPage("home");
@@ -89,4 +107,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
 
-});
+});*/
